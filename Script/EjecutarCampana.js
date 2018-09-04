@@ -94,7 +94,7 @@ $(document).ready(function () {
                     css = "espera";
                     ep++;
                 }
-                htmlMensaje += "<tr id='m" + listamensaje[i].idmensaje + "'><td><div class='pequeno'>" + listamensaje[i].nroTelefono + "</div></td>";
+                htmlMensaje += "<tr id='m" + listamensaje[i].idmensaje + "' data-id='" + listamensaje[i].idmensaje + "'><td><div class='pequeno'>" + listamensaje[i].nroTelefono + "</div></td>";
                 htmlMensaje += "<td class='" + css + "'><div class='normal'>" + listamensaje[i].respuesta + "</div></td>";
                 htmlMensaje += "<td><div class='normal'>" + listamensaje[i].hora + "</div></td></tr>";
             }
@@ -270,6 +270,44 @@ function actualizarResultadoMensaje() {
                 }, 1000);
             }
 
+        }
+    });
+}
+function msnActualizarCampana(){
+    var estado=$("#rojoClarito").html();
+    if(estado==="Desconectado"){
+        $("body").msmOK("Para guardar los cambio debes para el envio primero");
+        return;
+    }
+    $("body").msmPregunta("El cambio realizado solo afectara a los mensajes con estado de ESPERA. ¿Deseas realizar el cambio? ","actualizarCambios()");
+}
+function actualizarCambios(){
+    var campana=$("input[name=campana]").val();
+    var mensaje=$("#mensaje").val();
+    var foto=$(".fotoCuadro img").attr("src");
+    var telefono=$("#telefonoVariable option:selected").val();
+    var listaMensaje=$("#tblmensaje tbody tr");
+    var lista=[];
+    /*for (var i = 0; i < listaMensaje.length; i++) {
+        var id=$(listaMensaje[i]).data("id");
+        var estado=$(listaMensaje[i]).find("div:eq(1)").html();
+        if(estado==="ESPERA"){
+            var mensajeActual
+            lista.push(id);
+        }
+    }*/
+    cargando(true);
+    $.post(url, {proceso: 'actualizarCampana' ,listamensaje:lista, idcampana: idcampana,campana:campana,
+                mensaje:mensaje,foto:foto,telefono:telefono}, function (response) {
+        cargando(false);
+        var json = $.parseJSON(response);
+        if (json.error.length > 0) {
+            if ("Error Session" === json.error) {
+                window.parent.cerrarSession();
+            }
+            $("body").msmOK(json.error);
+        } else {
+            $("body").msmOK("Los cambios se guardaron correctamente");
         }
     });
 }

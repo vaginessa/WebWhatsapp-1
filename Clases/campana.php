@@ -71,5 +71,9 @@ class campana {
         $this->idcampana = $resultado->fetch_assoc()['id'];
         return true;
     }
+    function modificar() {
+        $consulta = "update whatsapp.campana set detalle='$this->detalle', fecha='$this->fecha', mensaje='$this->mensaje', arte='$this->arte', cuenta_id=$this->cuenta_id,varTelefono='$this->varTelefono' where idcampana=$this->idcampana";
+        return $this->CON->manipular($consulta);
+    }
 
 }

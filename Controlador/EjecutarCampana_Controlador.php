@@ -20,6 +20,18 @@ if ($proceso === "estadoActual") {
     $AccionCampana = new AccionCampana($con);
     $resultado = $AccionCampana->obtenerEstadoActual($idcampana, $tengoQR);
 }
+if ($proceso === "actualizarCampana") {
+    $campana2 = new campana($con);
+    $fechaactual = date("d/m/Y H:i:s");
+    $campana2->contructor($idcampana, $campana, $fechaactual, $mensaje, 0, $foto, 0, $sessionUsuario["id_cuenta"], $telefono);
+    if(!$campana2->modificar()){
+        $error="No se logro modificar la campaña.Intente nuevamente.";
+    }
+    /*$lista=$_POST["listamensaje"];
+    for ($i = 0; $i < count($lista); $i++) {
+        
+    }*/
+}
 if ($proceso === "detenerCampana") {
     $AccionCampana = new AccionCampana($con);
     $fechaactual = date("d/m/Y H:i:s");
