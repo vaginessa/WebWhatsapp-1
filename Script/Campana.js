@@ -1,9 +1,51 @@
 var url = '../Controlador/Campana_Controlador.php';
 var jsonExcel = [];
+var dataFile;
+var hilo = new Worker('../Script/Plugin/hilo.js');
 $(document).ready(function () {
     $(".fecha").val(fechaActual());
     $(".fecha").datepicker();
     localStorage.setItem("campana", 0);
+    hilo.addEventListener('message', function (e) {
+        jsonExcel = [];
+        var workbook = XLSX.read(dataFile, {type: 'array'});
+        var sheet_name_list = workbook.SheetNames;
+        sheet_name_list.forEach(function (y) {
+            var roa = XLSX.utils.sheet_to_json(workbook.Sheets[y]);
+            if (roa.length > 0) {
+                jsonExcel = roa;
+            }
+        });
+        var head = "";
+        var body = "";
+        var variable = "";
+        var optionVariable = "";
+        for (var i = 0; i < jsonExcel.length; i++) {
+            var item = jsonExcel[i];
+            body += "<tr>";
+            for (var key in item) {
+                if (i === 0) {
+                    head += "<th><div class='normal'>" + key + "</div></th>";
+                    variable += "<div class='encabezadoVariable' onclick='copiarVariable(this)'>";
+                    variable += "    <div class='nombre'>" + key + "</div>";
+                    variable += "    <div class='variable'>[--" + (key.toUpperCase()) + "--]</div>";
+                    variable += "</div>";
+                    optionVariable += "<option value='" + key + "'>" + key + "</option>";
+                }
+                var valor = item[key];
+                body += "<td><div class='normal' >" + valor + "</div></td>";
+            }
+            body += "</tr>";
+        }
+        $("#contactoG").html(optionVariable);
+        $("#telefonoG").html(optionVariable);
+        $("#telefonoVariable").html(optionVariable);
+        $("#tblExcel thead").html(head);
+        $("#tblExcel tbody").html(body);
+        $("#cuerpoEncabezado").html(variable);
+        $("#tblExcel").igualartabla();
+        cargando(false);
+    }, true);
     generarReporte();
 });
 function generarReporte() {
@@ -91,52 +133,23 @@ function subirExcel(e, tipo) {
         $("#inputExcel").click();
     } else {
         var files = e.target.files;
-        var i, f;
-        for (i = 0, f = files[i]; i != files.length; ++i) {
+
+        if (files && files[0]) {
+            var size = files[0].size;
+            if (size > 1000000) {
+                $("#inputExcel").val('')
+                $("body").msmOK("El archivo no puede pesar mas de 1Mb");
+                return;
+            }
+            cargando(true);
             var reader = new FileReader();
-            var name = f.name;
+            var name = files[0].name;
             $("input[name=nombreExcel]").val(name);
             reader.onload = function (e) {
-                var data = e.target.result;
-                jsonExcel = [];
-                var workbook = XLSX.read(data, {type: 'array'});
-                var sheet_name_list = workbook.SheetNames;
-                sheet_name_list.forEach(function (y) {
-                    var roa = XLSX.utils.sheet_to_json(workbook.Sheets[y]);
-                    if (roa.length > 0) {
-                        jsonExcel = roa;
-                    }
-                });
-                var head = "";
-                var body = "";
-                var variable = "";
-                var optionVariable = "";
-                for (var i = 0; i < jsonExcel.length; i++) {
-                    var item = jsonExcel[i];
-                    body += "<tr>";
-                    for (var key in item) {
-                        if (i === 0) {
-                            head += "<th><div class='normal'>" + key + "</div></th>";
-                            variable += "<div class='encabezadoVariable' onclick='copiarVariable(this)'>";
-                            variable += "    <div class='nombre'>" + key + "</div>";
-                            variable += "    <div class='variable'>[--" + (key.toUpperCase()) + "--]</div>";
-                            variable += "</div>";
-                            optionVariable += "<option value='" + key + "'>" + key + "</option>";
-                        }
-                        var valor = item[key];
-                        body += "<td><div class='normal' >" + valor + "</div></td>";
-                    }
-                    body += "</tr>";
-                }
-                $("#contactoG").html(optionVariable);
-                $("#telefonoG").html(optionVariable);
-                $("#telefonoVariable").html(optionVariable);
-                $("#tblExcel thead").html(head);
-                $("#tblExcel tbody").html(body);
-                $("#cuerpoEncabezado").html(variable);
-                $("#tblExcel").igualartabla();
+                dataFile = e.target.result;
+                hilo.postMessage({});
             };
-            reader.readAsArrayBuffer(f);
+            reader.readAsArrayBuffer(files[0]);
         }
     }
 }
