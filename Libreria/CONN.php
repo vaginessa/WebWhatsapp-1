@@ -17,6 +17,7 @@ class CONN {
             } else {
                 $this->estado = true;
             }
+            $this->conn->set_charset("utf8");
         } catch (PDOException $e) {
             $this->estado = false;
         }
@@ -35,6 +36,7 @@ class CONN {
     }
 
     function rellenar($resultado) {
+        //header("Content-Type: text/html;charset=utf-8");
         $lista = array();
         if ($resultado != null) {
             while ($row = $resultado->fetch_assoc()) {
