@@ -368,9 +368,9 @@ function cargarImagen(input, tipo) {
             var ctx = canvas.getContext('2d');
             var img = new Image();
             img.onload = function () {
-                canvas.width = 380;
-                canvas.height = 380;
-                ctx.drawImage(img, 0, 0, 380, 380);
+                canvas.width = this.width;
+                canvas.height = this.height;
+                ctx.drawImage(img, 0, 0, this.width, this.height);
                 imagenAModificar.attr("src", canvas.toDataURL(input.files[0].type));
                 cargando(false);
                 $("#fotocargar").remove();
