@@ -2,9 +2,6 @@ var url = 'Controlador/Index_Controlador.php';
 imagenCargando = "img/cargando.gif";
 $(document).ready(function () {
     localStorage.removeItem("usuario");
-    if (usuarioLocal === null) {
-        cerrarSession(1);
-    }
     localStorage.setItem("campana", 0);
 });
 function logear(e){
