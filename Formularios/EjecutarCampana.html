@@ -28,7 +28,7 @@
                         <img src="../img/earth190.svg" onclick="cargarImagen(this, 1)" class="point" >
                     </div>
                     <span class='negrillaenter'>Mensaje</span>
-                    <textarea id="mensaje" style="height: 106px; width: 213px;">
+                    <textarea id="mensaje" style="height: 106px; width: 213px;" onclick="copiarVariableSeleccionada()">
                             
                     </textarea><br>
                 </div>
@@ -38,11 +38,11 @@
 
                     </div>
                     <span class='negrillaenter'>Contactos</span>
-                    <table style="width: 100%; font-size: 12px;" id="tblExcel">
+                    <table style="width: 96%; font-size: 12px;" id="tblExcel">
                         <thead>
 
                         </thead>
-                        <tbody style="height: 229px;"></tbody>
+                        <tbody style="height: 211px;"></tbody>
                     </table>
                 </div>
                 <div class='contenedor30'>
@@ -65,7 +65,7 @@
             </div>
         </div>
         <footer>
-            <button onclick='msnActualizarCampana()' >Actualizar Campaña</button>
+            <button onclick='msnActualizarCampana()' >Modificar Campaña</button>
             <div class='cuadrado espera'>Espera <span id="scEP">0</span></div>
             <div class='cuadrado enviado'>Enviado <span id="scE">0</span></div>
             <div class='cuadrado bloqueado'>Bloqueado <span id="scB">0</span></div>

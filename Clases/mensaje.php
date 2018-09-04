@@ -49,8 +49,8 @@ class mensaje {
         return $this->CON->consulta2($consulta);
     }
 
-    function modificar($anuncio_id) {
-        $consulta = "update whatsapp.mensaje set idmensaje =" . $this->idmensaje . ", mensaje ='" . $this->mensaje . "', nroTelefono ='" . $this->nroTelefono . "', hora ='" . $this->hora . "', campana_id =" . $this->campana_id . ", respuesta ='" . $this->respuesta . "' where anuncio_id=" . $anuncio_id;
+    function modificar($idmensaje,$mensaje,$telefono) {
+        $consulta = "update whatsapp.mensaje set mensaje ='$mensaje', nroTelefono='$telefono' where idmensaje=" . $idmensaje;
         return $this->CON->manipular($consulta);
     }
 

@@ -154,6 +154,20 @@ function subirExcel(e, tipo) {
     }
 }
 function copiarVariable(ele) {
+    $("#cuerpoEncabezado .encabezadoVariable").removeClass("verdeClarito");
+    $(ele).addClass("verdeClarito");
+    var valor = $(ele).find(".variable").html();
+    var input = document.createElement("textarea");
+    input.value = valor;
+    input.id = 'txtareaCopy';
+    document.querySelector("body").appendChild(input);
+    input.select();
+    document.execCommand("Copy");
+    $("#txtareaCopy").remove();
+    $("#mensaje").focus();
+}
+function copiarVariableSeleccionada() {
+    var ele=$("#cuerpoEncabezado .verdeClarito");
     var valor = $(ele).find(".variable").html();
     var input = document.createElement("textarea");
     input.value = valor;

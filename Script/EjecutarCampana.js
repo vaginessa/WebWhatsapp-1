@@ -58,6 +58,7 @@ $(document).ready(function () {
             }
             $("#tblExcel thead").html(htmlHead);
             $("#tblExcel tbody").html(htmlBody);
+            $("#tblExcel").igualartabla();
             $("#cuerpoEncabezado").html(variable);
             $("#telefonoVariable").html(optionVariable);
             $("#telefonoVariable option[value='" + campana.varTelefono + "']").prop("selected", true);
@@ -288,14 +289,26 @@ function actualizarCambios(){
     var telefono=$("#telefonoVariable option:selected").val();
     var listaMensaje=$("#tblmensaje tbody tr");
     var lista=[];
-    /*for (var i = 0; i < listaMensaje.length; i++) {
+    for (var i = 0; i < listaMensaje.length; i++) {
         var id=$(listaMensaje[i]).data("id");
         var estado=$(listaMensaje[i]).find("div:eq(1)").html();
         if(estado==="ESPERA"){
-            var mensajeActual
-            lista.push(id);
+            var mensajeActual=mensaje;
+            var columnas=$("#tblExcel tbody tr:eq("+i+") div");
+            var vartelf="";
+            for (var j = 0; j < columnas.length; j++) {
+                var head="[--"+$("#tblExcel thead div:eq("+j+")").html().toUpperCase()+"--]";
+                var dato=$(columnas[j]).html();
+                if(head==="[--"+telefono.toUpperCase()+"--]"){
+                    vartelf=dato;
+                }
+                while (mensajeActual.indexOf(head) >= 0) {
+                    mensajeActual = mensajeActual.replace(head, dato);
+                }
+            }
+            lista.push({id:id,mensaje:mensajeActual,telefono:vartelf});
         }
-    }*/
+    }
     cargando(true);
     $.post(url, {proceso: 'actualizarCampana' ,listamensaje:lista, idcampana: idcampana,campana:campana,
                 mensaje:mensaje,foto:foto,telefono:telefono}, function (response) {
@@ -308,6 +321,32 @@ function actualizarCambios(){
             $("body").msmOK(json.error);
         } else {
             $("body").msmOK("Los cambios se guardaron correctamente");
+            ok();
         }
     });
+}
+function copiarVariable(ele) {
+    $("#cuerpoEncabezado .encabezadoVariable").removeClass("verdeClarito");
+    $(ele).addClass("verdeClarito");
+    var valor = $(ele).find(".variable").html();
+    var input = document.createElement("textarea");
+    input.value = valor;
+    input.id = 'txtareaCopy';
+    document.querySelector("body").appendChild(input);
+    input.select();
+    document.execCommand("Copy");
+    $("#txtareaCopy").remove();
+    $("#mensaje").focus();
+}
+function copiarVariableSeleccionada() {
+    var ele=$("#cuerpoEncabezado .verdeClarito");
+    var valor = $(ele).find(".variable").html();
+    var input = document.createElement("textarea");
+    input.value = valor;
+    input.id = 'txtareaCopy';
+    document.querySelector("body").appendChild(input);
+    input.select();
+    document.execCommand("Copy");
+    $("#txtareaCopy").remove();
+    $("#mensaje").focus();
 }
