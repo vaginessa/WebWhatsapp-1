@@ -1,0 +1,65 @@
+body{
+    background: none;
+}
+body button{
+   display: none;
+} 
+.popup{
+    top: 0 !important;
+    left: 0 !important;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    overflow: hidden; 
+    position: absolute;
+    color: black !important;
+}
+.hojaCarta{
+    width: 793px;
+    padding: 10px
+}
+
+th, td, td:first-child, td:last-child,tr:last-of-type td 
+,tr:last-of-type td:first-child, tr:last-of-type td:last-child  {
+    background: none;
+    color:black;
+    border: solid 1px black !important;
+    box-shadow: none;
+}
+tfoot td,tfoot td:first-child,tfoot td:last-child,tfoot tr:last-of-type td 
+,tfoot tr:last-of-type td:first-child,tfoot tr:last-of-type td:last-child{
+    border: solid 0px white !important;
+    text-align: right !important;
+}
+table{
+    border-collapse: collapse;
+}
+#contPrincipal{
+    height: auto;
+    width: auto;
+    display: block;
+}
+iframe{
+    box-shadow: none;
+    height: 1500px;
+    width: 800px;
+}
+header,#menu,#recordatoriopop{
+    display: none;
+}
+#tituloEtiqueta,#contenidoEtiqueta{
+    overflow: hidden;
+}
+page :left {
+ margin-left: 0cm;
+}
+
+@media print {
+a:link:after, a:visited:after {  
+      display: none;
+      content: ""; 
+} 
+}
+@page{
+   margin: 0;
+}
