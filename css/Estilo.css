@@ -558,9 +558,10 @@ footer button,footer select{
 }
 
 menu .item:hover{
-    color:white;
-    box-shadow: 0 0 2px 0 rgba(192, 192, 192, 0.71);
-    background: rgba(192, 192, 192, 0.13);
+    background: #ffffff91;
+    color: #4b4b4b;
+    border-radius: 11px;
+    box-shadow: 0px 0px 4px 0 #054205;
 }
 menu .item{
     padding: 6px 15px;
@@ -740,7 +741,30 @@ textarea{
 .espera{
     background: #fce170;
 }
+#logoPortal img{
+    width: 30px;
+    margin: -9px 0;
+}
+#logoPortal span{
+    color: #4b4b4b;
+    font-size: 17px;
+}
 
+#logoPortal{
+    width: 186px;
+    margin: -63px 0;
+    padding: 6px 8px;
+    display: inline-block;
+    margin-left: -22px;
+    background: white;
+    margin-top: -16px;
+    position: relative;
+    top: 0px;
+    border-radius: 12px;
+    padding-left: 23px;
+    left: -14px;
+    box-shadow: 1px 1px 6px 0px #184818;
+}
 
 
 

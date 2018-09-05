@@ -2,6 +2,7 @@
 <html style="min-width: 1348px;">
     <head>
         <title>Portal Administrativo</title>
+         <link rel="shortcut icon" href="img/conectado.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href = "css/Estilo.css" rel = "stylesheet" type = "text/css"/>
         <script src = "Script/Plugin/jquery-2.1.3.min.js" type = "text/javascript"></script>
@@ -12,6 +13,11 @@
     <body  onunload="cerrarNavegador()">
 
         <menu>
+            <div id="logoPortal">
+                <img src="img/conectado.png" >
+                <span>Massive Whatsapp</span>
+            </div>
+            
             <span class="item" onclick="redireccionar('Formularios/ResumenGeneral.html')" >Resumen</span>
             <span class="item" onclick="redireccionar('Formularios/Campana.html')" >Campaña</span>
             <span class="item" onclick="redireccionar('Formularios/Campana.html')" style="display: none">Facturacion</span>
