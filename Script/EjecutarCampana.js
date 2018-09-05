@@ -340,6 +340,10 @@ function copiarVariable(ele) {
 }
 function copiarVariableSeleccionada() {
     var ele = $("#cuerpoEncabezado .verdeClarito");
+    return;
+    /*if(ele.length===0){
+        return;
+    }*/
     var valor = $(ele).find(".variable").html();
     var input = document.createElement("textarea");
     input.value = valor;

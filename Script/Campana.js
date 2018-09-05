@@ -168,6 +168,10 @@ function copiarVariable(ele) {
     $("#mensaje").focus();
 }
 function copiarVariableSeleccionada() {
+    return;
+    /*if(ele.length===0){
+        return;
+    }*/
     var ele=$("#cuerpoEncabezado .verdeClarito");
     var valor = $(ele).find(".variable").html();
     var input = document.createElement("textarea");
