@@ -158,10 +158,10 @@ function cambioEstadoQR() {
                 tengoQr = 0;
             }
             if (item.estado === "ACTIVO") {
-                if ($("#estadoQR").html() !== "Conectado") {
+                /*if ($("#estadoQR").html() !== "Conectado") {
                     $("#btnqr").text("Obtener QR");
                     GenerarQR();
-                }
+                }*/
                 $("#btnqr").text("Detener");
                 $("#estadoQR").html("Conectado");
                 $("#estadoQR").removeClass("rojoClarito");
