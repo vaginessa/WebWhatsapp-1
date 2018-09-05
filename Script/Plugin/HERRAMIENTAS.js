@@ -13,8 +13,8 @@ var imagenCargando = "../img/cargando.gif";
             var tabla = $(this);
             $(this).find("tbody").css("width", $(this).find("thead").width() + 20);
             tabla.find("tbody tr").click(function () {
-                tabla.find("tbody tr").css("background", "white");
-                $(this).css("background", "rgb(210, 177, 103)");
+                tabla.find("tbody tr td").css("background", "white");
+                $(this).find("td").css("background", "rgba(253, 246, 169, 0.62)");
             });
         },
         ocultar: function () {

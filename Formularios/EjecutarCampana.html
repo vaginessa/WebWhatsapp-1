@@ -16,7 +16,7 @@
         <h1>Campaña</h1>
         <div id="formulario" >
             <div id="cuerpoFormulario">
-                <div class='contenedor35'>
+                <div class='contenedor25'>
                     <span class='negrillaenter separar'>Creado</span>
                     <input type='text' class='medio' name='fecha' readonly/><br>
                     <span class='negrillaenter separar'>Campaña </span>
@@ -24,30 +24,31 @@
                     <span class='negrillaenter'>Variable Telefono</span>
                     <select class='medio' id='telefonoVariable'></select><br>
                     <span class='negrillaenter'>Arte</span>
-                    <div class='fotoCuadro' >
-                        <img src="../img/earth190.svg" onclick="cargarImagen(this, 1)" class="point" >
+                    <div class='fotoCuadro' style="max-height: 140px;">
+                        <img src="../img/earth190.svg" onclick="cargarImagen(this, 1)"  >
                     </div>
-                    <span class='negrillaenter'>Mensaje</span>
-                    <textarea id="mensaje" style="height: 106px; width: 213px;" onclick="copiarVariableSeleccionada()">
-                            
-                    </textarea><br>
-                </div>
-                <div class='contenedor35'>
-                    <span class='negrillaenter'>Encabezados</span>
-                    <div id="cuerpoEncabezado">
+                     <span class='negrillaenter'>Encabezados</span>
+                     <div id="cuerpoEncabezado" style="height: 149px;">
 
                     </div>
+                    
+                </div>
+                <div class='contenedor35' style="width:46%;">
+                   <span class='negrillaenter'>Mensaje</span>
+                    <textarea id="mensaje" style="height: 143px; width: 96%;" onclick="copiarVariableSeleccionada()">
+                            
+                    </textarea><br>
                     <span class='negrillaenter'>Contactos</span>
-                    <table style="width: 96%; font-size: 12px;" id="tblExcel">
+                    <table style="width: 96%; font-size: 11px;" id="tblExcel">
                         <thead>
 
                         </thead>
-                        <tbody style="height: 211px;"></tbody>
+                        <tbody style="height: 240px;"></tbody>
                     </table>
                 </div>
                 <div class='contenedor30'>
                     <span class='negrillaenter'>Estado</span>
-                    <img src="../img/wpLogo.jpg" alt="" style="width: 143px; height: 143px;" id='imgQR'/>
+                    <img src="../img/desconectado.png" alt="" style="width: 143px; height: 143px;" id='imgQR'/>
                     <div id='estadoWP'>
                         <div class="rojoClarito" id='estadoQR'>Desconectado</div>
                         <button onclick='GenerarQR()' class='normal' id='btnqr'>Obtener QR</button>
@@ -59,7 +60,7 @@
                             <th><div class='normal'>Estado</div></th>
                             <th><div class='normal'>Fecha</div></th>
                         </thead>
-                        <tbody style="height: 252px;"></tbody>
+                        <tbody style="height: 236px;"></tbody>
                     </table>
                 </div>
             </div>

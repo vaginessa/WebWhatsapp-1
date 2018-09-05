@@ -78,14 +78,14 @@ function ver() {
 
             var cuentas = json.result.cuentas;
             var totalcant = 0;
-            var html = "<div style='text-align: right; font-size: 13px;' class='negrilla'>Mens. Enviado</div>"
+            var html = "<div style='text-align: right; font-size: 13px;' class='negrilla'>Campañas Creadas</div>"
             for (var i = 0; i < cuentas.length; i++) {
                 var nombre = cuentas[i].nombre;
                 var cant = parseInt(cuentas[i].cant);
                 totalcant += cant;
                 html += "<span class='' style='margin-bottom: 3px; display:block;'>";
                 html += nombre;
-                html += "<input type='text' class='cuadroResultado' value='" + cant + "'/>";
+                html += "<input type='text' class='cuadroResultado' value='" + cant + "' readonly/>";
                 html += "</span>";
             }
             $("#contenedorCuenta").html(html);
@@ -113,8 +113,9 @@ function ver() {
                     $("input[name=msnextraUtilizado]").val(0);
                     $("input[name=inversion]").val(costototal);
                 } else {
+                    var costototal=parseFloat(cuentas.costoTotal);
                     var msnExtra = enviado - cantidadPaquete;
-                    var inversion = extra * msnExtra;
+                    var inversion = (extra * msnExtra)+costototal;
                     $("input[name=msnextraUtilizado]").val(msnExtra);
                     $("input[name=inversion]").val(inversion.toFixed(2));
                 }

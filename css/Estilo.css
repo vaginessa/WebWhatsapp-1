@@ -1,7 +1,7 @@
 body{
-    background: #262626;
+    background: white;
     font-size: 15px;
-    font-family: arial;
+    font-family: "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", "sans-serif";
     overflow: auto;
     color: black;
     padding: 0;
@@ -94,6 +94,7 @@ td{
     padding: 10px 15px;
     position: relative;
     transition: all 300ms;
+    background: white;
 }
 td:first-child {
     box-shadow: inset 1px 0 0 #fff;
@@ -127,15 +128,12 @@ th {
     position: relative;
     text-shadow: 0 1px 0 #000;	
 }
-tbody:hover td {
-    /*color:rgba(121, 119, 119, 0.83);
-    color: transparent;*/
-    /*text-shadow: 0 0 1px #aaa;*/
-}
 
+tbody tr{
+    background: white;
+}
 tbody:hover tr:hover td {
-    /*color: black;
-    text-shadow: 0 1px 0 #fff;*/
+
     background: #9dd49d;
     cursor:pointer;
 }
@@ -149,7 +147,7 @@ th:last-child {
 }
 
 table{
-    background: white;
+
     display: inline-block;
     overflow-x: auto;
     overflow-y: hidden;
@@ -237,6 +235,8 @@ select{
 input,select{
     font-size: 13px;
     padding: 2px 3px;
+    border: none;
+    box-shadow: 0 0 1px 0 #848080;
 }
 tfoot td{
     text-align: right !important;
@@ -253,8 +253,10 @@ button{
     box-shadow: 0 0 1px 1px #233323;
 }
 footer {
-    padding: 0 10px;
+    padding: 9px 10px;
     margin-top: 5px;
+    border-top: 6px solid #f9f9f8;
+    background: #FAF7EB;
 }
 footer span{
     font-size: 19px;
@@ -263,22 +265,23 @@ footer span{
 }
 footer .cuadrado span{
     background: #ffffffa8;
-    padding: 4px 7px;
+    padding: 0px 7px;
     position: relative;
     left: 10px;
-    margin-right: -4px;
-    box-shadow: 0 0 1px 0 black;
+    margin-right: -6px;
     margin-left: -3px;
+    top: 2px;
 }
 footer .cuadrado{
     display: inline-block;
     margin-left: 14px;
+    line-height: 19px;
     padding: 4px 20px;
     height: 22px;
     position: relative;
     top: 1px;
     margin: -15px 0;
-    font-weight: bold;
+    font-weight: 500;
 }
 .error{
     color: #4f0d00;
@@ -291,11 +294,11 @@ footer .cuadrado{
 }
 .popup{
     background: white;
-    box-shadow: 0 0 10px 1px black;
+    box-shadow: 0 0 5px 0px black;
     padding: 10px 20px;
     color: black;
-    display:none;
-    border-radius: 4px;
+    display: none;
+    border-radius: 2px;
     z-index: 2;
 }
 .alineacionIzquierda{
@@ -343,8 +346,8 @@ footer .cuadrado{
     padding: 0;
 }
 #msmOK{
-    border: medium solid #4c4c4c;
-    border-radius: 7px;
+    border: 1px solid #4c4c4c;
+    border-radius: 3px;
     width: 340px;
     z-index: 5;
 }
@@ -353,7 +356,7 @@ p{
     margin: 1px 0;
 }
 .background{
-    background: rgba(20, 20, 20, 0.4) none repeat scroll 0 0;
+    background: rgba(93, 92, 92, 0.4) none repeat scroll 0 0;
     height: 100%;
     left: 0;
     position: fixed;
@@ -386,9 +389,6 @@ h1 {
 .minitext{
     font-size: 9.5px;
     font-weight: bold;
-}
-#fondoFormulario{
-    background: none;
 }
 header {
     background: #E8450C;
@@ -428,13 +428,13 @@ div#menu {
 }
 iframe {
     border: none;
-    box-shadow: 0 0 0px 1px black;
-    float: left;
-    width: 78%;
+    width: 97%;
     min-width: 906px;
     height: 570px;
     background: white;
-    margin-left: 20px;
+    margin: 10px auto;
+    display: block;
+    background: #edf8f5;
 }
 #contenedorPrincipal {
     padding: 0;
@@ -509,40 +509,52 @@ footer button,footer select{
     margin-right: 2px;
 }
 #CuerpoLogin span{
-    color: #CCC;
+    color: #4b4b4b;
+    font-size: 16px;
 }
 #CuerpoLogin{
-    background: #4B4B4B;
-    margin: 30px auto;
-    border: rgba(0,0,0,.2) solid;
+    background: white;
+    margin: 83px auto;
+    border: none;
     width: 500px;
     font-size: 21px;
     padding: 0;
+    box-shadow: 0 0px 1px 5px rgba(0, 0, 0, 0.19);
+    margin-bottom: 0;
 }
 #CuerpoLogin button{
-    width: 72%;
     padding: 9px;
     margin: 14px 0;
-    font-size: 18px;
+    background: #53BCA6;
+    font-size: 17px;
+    color: white;
+    font-weight: 700;
+    box-shadow: 0 0 2px 0px #081512;
+    border-radius: 9px;
+    width: 241px;
 }
 #CuerpoLogin .titulo{
-    box-sizing: border-box;
     height: 50px;
-    line-height: 50px;
-    padding-left: 20px;
-    color: #CCC;
-    font-size: 1.25rem;
-    font-weight: 900;
-    background: linear-gradient(to bottom,#4b4b4b 0,#414141 50%,#373737 100%);
+    padding: 10px;
+    color: #55636B;
+    font-size: 18px;
+    font-weight: 500;
+    background: white;
+    text-align: left;
+    margin-bottom: 23px;
+    border-bottom: 4px solid #b6ded3;
 }
 
 #CuerpoLogin input{
     font-size: 17px;
     text-align: center;
     width: 83%;
-    border: rgba(0,0,0,.7) solid 1px;
+    border: none;
     padding: 7px 7px;
-    background: rgba(172,172,172,1);
+    background: #e0ecea;
+    color: #676262;
+    display: block;
+    margin: 8px auto;
 }
 
 menu .item:hover{
@@ -554,13 +566,14 @@ menu .item{
     padding: 6px 15px;
     cursor: pointer;
     margin: 0;
+    font-size: 17px;
 }
 menu{
-    background: #191919;
+    background: #1ebea5;
     margin: 0;
     padding: 15px 20px;
-    color: #ccc;
-    font-weight: bold;
+    color: #fff;
+    font-weight: 500;
     font-size: 20px;
 }
 #cerrarSeccion{
@@ -607,11 +620,11 @@ menu{
     width: 100%;
 }
 #fondoFormulario{
-    background: white;
+    background: #edf8f5;
     overflow: auto;
 }
 div#formulario {
-    height: 87%;
+    height: 468px;
 }
 div#cuerpoFormulario {
     overflow: auto;
@@ -653,11 +666,14 @@ input[type=checkbox]{
     box-shadow: 0 0 1px 0 black;
 }
 .fotoCuadro{
+    overflow: auto;
     width: 150px;
+    max-height: 190px;
     background: #f1f1f182;
     box-shadow: 0 0 1px 0 black;
     padding: 3px 10px;
     margin: 3px 2px;
+    cursor: point;
 }
 .encabezadoVariable .nombre{
     padding: 2px;
@@ -678,6 +694,7 @@ input[type=checkbox]{
     text-align: center;
     font-size: 11px;
     margin: 3px;
+    background: white;
 }
 #cuerpoEncabezado{
     padding: 0;
@@ -687,6 +704,8 @@ input[type=checkbox]{
 textarea{
     height: 106px;
     resize: none;
+    border: none;
+    box-shadow: 0 0 1px 0 #848080;
 }
 
 
@@ -707,19 +726,19 @@ textarea{
     font-weight: bold;
 }
 .enviado{
-    background: #68bf68; 
+    background: #27b8a2; 
 }
 .bloqueado{
-    background: #babdba; 
+    background: #b0b3b0; 
 }
 .sinWhatsapp{
-    background: #f9a96f; 
+    background: #f39551; 
 }
 .telefonoMal{
-    background: #d699ef; 
+    background: #39b3ed; 
 }
 .espera{
-    background: #e6e658;
+    background: #fce170;
 }
 
 

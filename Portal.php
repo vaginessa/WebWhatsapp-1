@@ -12,28 +12,15 @@
     <body  onunload="cerrarNavegador()">
 
         <menu>
-            <span class="item" onclick="menu('VENTA')" id="mVentas">VENTA</span>
+            <span class="item" onclick="redireccionar('Formularios/ResumenGeneral.html')" >Resumen</span>
+            <span class="item" onclick="redireccionar('Formularios/Campana.html')" >Campaña</span>
+            <span class="item" onclick="redireccionar('Formularios/Campana.html')" style="display: none">Facturacion</span>
+            <span class="item" onclick="redireccionar('Formularios/Campana.html')" style="display: none">Planes de pago</span>
+            <span class="item" onclick="redireccionar('Formularios/Campana.html')" style="display: none">Empresa</span>
+            <span class="item" onclick="redireccionar('Formularios/Campana.html')" style="display: none">Cuentas</span>
             <span id="cerrarSeccion"  class="item" onclick="cerrarSession(1)">Cerrar Session</span>
         </menu>
         <div id="cuerpo">
-            <div id='submenu'>
-                <div class='menu'>
-                    <div class="tituloMenu">MENU</div>
-                    <div class='cuerpo'>
-                        <div class='point item' id="p1" onclick="redireccionar('Formularios/ResumenGeneral.html')">Inicio</div>
-                        <div class='point item' id="p1" onclick="redireccionar('Formularios/Campana.html')">Campaña</div>
-                        <div class='point item' id="p1" onclick="redireccionar('Formularios/ResumenGeneral.html')" >Facturacion</div>
-                        <div class='point item' id="p1" onclick="redireccionar('Formularios/ResumenGeneral.html')">Planes de pago</div>
-                        <div class='point item' id="p1" onclick="redireccionar('Formularios/ResumenGeneral.html')">Empresa</div>
-                        <div class='point item' id="p1" onclick="redireccionar('Formularios/ResumenGeneral.html')">Cuentas</div>
-                    </div>
-                </div>
-                <div class="centrar" style="padding: 5px 0;   font-weight: bold;">
-                    <span id="Nombreusuario"></span><br>
-                   
-                    <button onclick='cerrarSession(1)' class='medio' style="margin-top: 7px;   padding: 2px 0;">Cerrar Session</button>
-                </div>
-            </div>
             <iframe src="">
 
             </iframe>

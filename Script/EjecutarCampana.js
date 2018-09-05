@@ -23,7 +23,7 @@ $(document).ready(function () {
             $("body").msmOK(json.error);
         } else {
             var campana = json.result.campana;
-            if(campana.estado==="0"){
+            if (campana.estado === "0") {
                 $("#btnqr").remove();
             }
             var listavariable = json.result.variable;
@@ -154,19 +154,20 @@ function cambioEstadoQR() {
                 $("#estadoQR").removeClass("verdeClarito");
                 $("#estadoQR").removeClass("AmarilloClarito");
                 $("#estadoQR").addClass("rojoClarito");
-                $("#imgQR").attr("src", "../img/wpLogo.jpg");
+                $("#imgQR").attr("src", "../img/desconectado.png");
                 tengoQr = 0;
             }
             if (item.estado === "ACTIVO") {
                 if ($("#estadoQR").html() !== "Conectado") {
-
+                    $("#btnqr").text("Obtener QR");
+                    GenerarQR();
                 }
                 $("#btnqr").text("Detener");
                 $("#estadoQR").html("Conectado");
                 $("#estadoQR").removeClass("rojoClarito");
                 $("#estadoQR").removeClass("AmarilloClarito");
                 $("#estadoQR").addClass("verdeClarito");
-                $("#imgQR").attr("src", "../img/wpLogo.jpg");
+                $("#imgQR").attr("src", "../img/conectado.png");
                 tengoQr = 0;
                 setTimeout(function () {
                     cambioEstadoQR();
@@ -177,7 +178,6 @@ function cambioEstadoQR() {
                 setTimeout(function () {
                     tengoQr = 0;
                     cambioEstadoQR();
-                    //hilo.postMessage({});// pronar cual ocupa menos recursos esto o directo la otra
                 }, 500);
             }
         }
@@ -206,7 +206,7 @@ function GenerarQR() {
                 $("#estadoQR").removeClass("verdeClarito");
                 $("#estadoQR").removeClass("AmarilloClarito");
                 $("#estadoQR").addClass("rojoClarito");
-                $("#imgQR").attr("src", "../img/wpLogo.jpg");
+                $("#imgQR").attr("src", "../img/desconectado.png");
                 tengoQr = 0;
             } else {
                 hilo.postMessage({});
@@ -274,44 +274,44 @@ function actualizarResultadoMensaje() {
         }
     });
 }
-function msnActualizarCampana(){
-    var estado=$("#rojoClarito").html();
-    if(estado==="Desconectado"){
+function msnActualizarCampana() {
+    var estado = $("#rojoClarito").html();
+    if (estado === "Desconectado") {
         $("body").msmOK("Para guardar los cambio debes para el envio primero");
         return;
     }
-    $("body").msmPregunta("El cambio realizado solo afectara a los mensajes con estado de ESPERA. ¿Deseas realizar el cambio? ","actualizarCambios()");
+    $("body").msmPregunta("El cambio realizado solo afectara a los mensajes con estado de ESPERA. ¿Deseas realizar el cambio? ", "actualizarCambios()");
 }
-function actualizarCambios(){
-    var campana=$("input[name=campana]").val();
-    var mensaje=$("#mensaje").val();
-    var foto=$(".fotoCuadro img").attr("src");
-    var telefono=$("#telefonoVariable option:selected").val();
-    var listaMensaje=$("#tblmensaje tbody tr");
-    var lista=[];
+function actualizarCambios() {
+    var campana = $("input[name=campana]").val();
+    var mensaje = $("#mensaje").val();
+    var foto = $(".fotoCuadro img").attr("src");
+    var telefono = $("#telefonoVariable option:selected").val();
+    var listaMensaje = $("#tblmensaje tbody tr");
+    var lista = [];
     for (var i = 0; i < listaMensaje.length; i++) {
-        var id=$(listaMensaje[i]).data("id");
-        var estado=$(listaMensaje[i]).find("div:eq(1)").html();
-        if(estado==="ESPERA"){
-            var mensajeActual=mensaje;
-            var columnas=$("#tblExcel tbody tr:eq("+i+") div");
-            var vartelf="";
+        var id = $(listaMensaje[i]).data("id");
+        var estado = $(listaMensaje[i]).find("div:eq(1)").html();
+        if (estado === "ESPERA") {
+            var mensajeActual = mensaje;
+            var columnas = $("#tblExcel tbody tr:eq(" + i + ") div");
+            var vartelf = "";
             for (var j = 0; j < columnas.length; j++) {
-                var head="[--"+$("#tblExcel thead div:eq("+j+")").html().toUpperCase()+"--]";
-                var dato=$(columnas[j]).html();
-                if(head==="[--"+telefono.toUpperCase()+"--]"){
-                    vartelf=dato;
+                var head = "[--" + $("#tblExcel thead div:eq(" + j + ")").html().toUpperCase() + "--]";
+                var dato = $(columnas[j]).html();
+                if (head === "[--" + telefono.toUpperCase() + "--]") {
+                    vartelf = dato;
                 }
                 while (mensajeActual.indexOf(head) >= 0) {
                     mensajeActual = mensajeActual.replace(head, dato);
                 }
             }
-            lista.push({id:id,mensaje:mensajeActual,telefono:vartelf});
+            lista.push({id: id, mensaje: mensajeActual, telefono: vartelf});
         }
     }
     cargando(true);
-    $.post(url, {proceso: 'actualizarCampana' ,listamensaje:lista, idcampana: idcampana,campana:campana,
-                mensaje:mensaje,foto:foto,telefono:telefono}, function (response) {
+    $.post(url, {proceso: 'actualizarCampana', listamensaje: lista, idcampana: idcampana, campana: campana,
+        mensaje: mensaje, foto: foto, telefono: telefono}, function (response) {
         cargando(false);
         var json = $.parseJSON(response);
         if (json.error.length > 0) {
@@ -339,7 +339,7 @@ function copiarVariable(ele) {
     $("#mensaje").focus();
 }
 function copiarVariableSeleccionada() {
-    var ele=$("#cuerpoEncabezado .verdeClarito");
+    var ele = $("#cuerpoEncabezado .verdeClarito");
     var valor = $(ele).find(".variable").html();
     var input = document.createElement("textarea");
     input.value = valor;

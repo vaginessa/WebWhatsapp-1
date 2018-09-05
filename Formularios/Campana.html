@@ -24,7 +24,7 @@
                     <button onclick='generarReporte()' class='medio sinborde'>GENERAR REPORTE</button>
                 </div>
                 <div class='centrar'>
-                                        <div class='minitext'>AL DARLE DOBLE CLICK A UNA CAMPAÑA PODRAS GESTIONARLA</div>
+                    <div class='minitext'>AL DARLE DOBLE CLICK A UNA CAMPAÑA PODRAS GESTIONARLA</div>
 
                     <table id="tblResultado">
                         <thead style="max-height: 356px;">
@@ -52,25 +52,25 @@
         <div class='background'></div>
         <div class='popup' id="campanapop" style="width: 850px;">
             <div class='tituloPop'>Nueva Campaña</div>
-            <div style="height: 300px; overflow: auto;" >
+            <div style="height: 311px; overflow: auto;" >
                 <div class='contenedor25'>
                     <span class='negrillaenter'>Campaña</span>
                     <input type='text' class='medio' name='campana'/>
                     <span class='negrillaenter'>Arte</span>
                     <div class='fotoCuadro' >
-                        <img src="../img/earth190.svg" onclick="cargarImagen(this,1)" class="point" >
+                        <img src="../img/earth190.svg" onclick="cargarImagen(this, 1)" >
                     </div>
                     <span class='negrillaenter'>Variable Telefono</span>
                     <select class='medio' id='telefonoVariable'></select>
-                    <input type='file' id="inputExcel" onchange="subirExcel(event,2)" accept=".xlsx" style="display: none;"/>
+                    <input type='file' id="inputExcel" onchange="subirExcel(event, 2)" accept=".xlsx" style="display: none;"/>
                 </div>
                 <div class='contenedor50 centrar'>
-                    <button onclick='subirExcel(1,1)' class='normal sinborde'>Subir Excel</button>
+                    <button onclick='subirExcel(1, 1)' class='normal sinborde'>Subir Excel</button>
                     <input type='text' style="width:280px;" readonly name='nombreExcel'/>
                     <br>
-                    <table style="width: 400px; font-size: 12px;" id="tblExcel">
+                    <table style="width: 400px; font-size: 11px;" id="tblExcel">
                         <thead>
-                           
+
                         </thead>
                         <tbody style="height: 198px;"></tbody>
                     </table>
@@ -79,7 +79,7 @@
                     <div style="padding: 0;  margin-left: 5px;">
                         <span class='negrilla'>Encabezados</span>
                         <div id="cuerpoEncabezado">
-                            
+
                         </div>
                         <span class='negrilla'>Mensaje</span>
                         <textarea id="mensaje" style="height: 106px; width: 213px;" onclick="copiarVariableSeleccionada()">
@@ -104,11 +104,11 @@
             <select id='telefonoG' class="grande">
             </select><br>
             <span class='negrilla point' onclick='abrirGoogle()' style="margin: 6px 0;
-                display: inline-block;
-                font-size: 12px;
-                color: #2b2575;">Abrir Contact Google</span>
+                  display: inline-block;
+                  font-size: 12px;
+                  color: #2b2575;">Abrir Contact Google</span>
             <br>
-            
+
             <div class='centrar'>
                 <button onclick='popExportarGoogle(2)' class='normal'>Cerrar</button>
                 <button  class='normal'>

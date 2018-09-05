@@ -10,100 +10,94 @@
         <script src="../Script/Plugin/HERRAMIENTAS.js" type="text/javascript"></script>
         <script src="../Script/ResumenGeneral.js" type="text/javascript"></script>
     </head>
-    <body id="fondoFormulario">
+    <body id="fondoFormulario" >
         <h1>Resumen General</h1>
-        <div id="formulario" >
+        <div id="formulario" style="height: 464px;">
             <div id="cuerpoFormulario">
-                <div class='cuerpo' style="height: 470px; overflow: auto;">
-                    <div class='negrilla'>PAQUETE</div>
-                    <div class=''>
-                        <div class='contenedor40'>
-                            <span class='' style="margin-bottom: 3px; display:block;">
-                                Cantidad de Mensajes
-                                <input type='text' class='cuadroResultado' name='cantMensaje'/>
-                            </span>
-                            <span class='' style="margin-bottom: 3px; display:block;">
-                                Costo por Mensaje
-                                <input type='text' class='cuadroResultado' name='costoXmensaje'/>
-                            </span>                 
-                            <span class='' style="margin-bottom: 3px; display:block;">
-                                Costo por Mensaje Extra
-                                <input type='text' class='cuadroResultado' name='mensajeExtra'/>
-                            </span>
-                            <span class='' style="margin-bottom: 3px; display:block;">
-                                Total Costo Paquete 
-                                <input type='text' class='cuadroResultado' name='totalPaquete'/>
-                            </span>
+                <div class='negrilla'>PAQUETE</div>
+                <div class=''>
+                    <div class='contenedor40'>
+                        <span class='' style="margin-bottom: 3px; display:block;">
+                            Cantidad de Mensajes
+                            <input type='text' class='cuadroResultado' name='cantMensaje' readonly/>
+                        </span>
+                        <span class='' style="margin-bottom: 3px; display:block;">
+                            Costo por Mensaje
+                            <input type='text' class='cuadroResultado' name='costoXmensaje' readonly/>
+                        </span>                 
+                        <span class='' style="margin-bottom: 3px; display:block;">
+                            Costo por Mensaje Extra
+                            <input type='text' class='cuadroResultado' name='mensajeExtra' readonly/>
+                        </span>
+                        <span class='' style="margin-bottom: 3px; display:block;">
+                            Total Costo Paquete 
+                            <input type='text' class='cuadroResultado' name='totalPaquete' readonly/>
+                        </span>
 
-                        </div>
-                        <div class='contenedor40'>
-                            <span class='' style="margin-bottom: 3px; display:block;">
-                                Mensajes Utilizados
-                                <input type='text' class='cuadroResultado' name='msnutilizados'/>
-                            </span>
-                            <span class='' style="margin-bottom: 3px; display:block;">
-                                Mensajes Extras Utilizados 
-                                <input type='text' class='cuadroResultado' name='msnextraUtilizado'/>
-                            </span>                 
-                            <span class='' style="margin-bottom: 3px; display:block;">
-                                Inversion del Mes
-                                <input type='text' class='cuadroResultado' name='inversion'/>
-                            </span>
-                        </div>
                     </div>
-                    <div class='clear'></div>
-                    <div class='negrilla'>MENSAJES</div>
-                    <div class=''>
-                        <div class='contenedor40'>
-                            <span class='' style="margin-bottom: 3px; display:block;">
-                                Mensajes en Espera
-                                <input type='text' class='cuadroResultado espera' name='msnEspera' readonly/>
-                            </span>
-                            <span class='' style="margin-bottom: 3px; display:block;">
-                                Mensajes Entregados
-                                <input type='text' class='cuadroResultado enviado' name='msnEntregados' readonly/>
-                            </span>                 
-                            <span class='' style="margin-bottom: 3px; display:block;">
-                                Mensajes a Telefonos Bloqueados 
-                                <input type='text' class='cuadroResultado bloqueado' name='msnBloqueados' readonly/>
-                            </span>
-                            <span class='' style="margin-bottom: 3px; display:block;">
-                                Mensajes a Telefonos Sin Whatsapp 
-                                <input type='text' class='cuadroResultado sinWhatsapp' name='msnSnWp' readonly/>
-                            </span>
-                            <span style="margin-bottom: 3px; display:block;">
-                                Mensajes a Telefonos Inexistentes
-                                <input type='text' class='cuadroResultado telefonoMal' name='msnInext' readonly/>
-                            </span>
-                            <span class=''>
-                                <input type='text' class='cuadroResultado' name='msnTotal' readonly/>
-                                <span class='negrilla separar alineacionDerecha ' style="margin-right: 9px; margin-top: 2px;">Total</span>
-                            </span>
-                        </div>
-                        <div class='contenedor60'>
-                            <div style="margin-top: -27px; width: 510px ; height: 300px;     margin-bottom: -173px;   margin-left: 23px;">
-                            <canvas id="grafMsn" width="200" height="100"  ></canvas>
-                                
-                            </div>
-                            
-                            
-                        </div>
+                    <div class='contenedor40'>
+                        <span class='' style="margin-bottom: 3px; display:block;">
+                            Mensajes Utilizados
+                            <input type='text' class='cuadroResultado' name='msnutilizados' readonly/>
+                        </span>
+                        <span class='' style="margin-bottom: 3px; display:block;">
+                            Mensajes Extras Utilizados 
+                            <input type='text' class='cuadroResultado' name='msnextraUtilizado' readonly/>
+                        </span>                 
+                        <span class='' style="margin-bottom: 3px; display:block;">
+                            Inversion del Mes
+                            <input type='text' class='cuadroResultado' name='inversion' readonly/>
+                        </span>
                     </div>
-                    <div class='clear'></div>
-                    <div class='negrilla'>CUENTAS</div>
-                    <div class=''>
-                        <div class='contenedor40' id="contenedorCuenta">
-                            <div style="text-align: right; font-size: 13px;" class="negrilla">Mens. Enviado</div>
-                            <span class='' style="margin-bottom: 3px; display:block;">
-                                Williams Armando Montenegro Mansilla
-                                <input type='text' class='cuadroResultado' name='msnEnviado'/>
-                            </span>
-
-                        </div>
-                        <div class='contenedor60'>a</div>
-                    </div>
-
                 </div>
+                <div class='clear'></div>
+                <div class='negrilla'>MENSAJES</div>
+                <div class=''>
+                    <div class='contenedor40'>
+                        <span class='' style="margin-bottom: 3px; display:block;">
+                            Mensajes en Espera
+                            <input type='text' class='cuadroResultado espera' name='msnEspera' readonly/>
+                        </span>
+                        <span class='' style="margin-bottom: 3px; display:block;">
+                            Mensajes Entregados
+                            <input type='text' class='cuadroResultado enviado' name='msnEntregados' readonly/>
+                        </span>                 
+                        <span class='' style="margin-bottom: 3px; display:block;">
+                            Mensajes a Telefonos Bloqueados 
+                            <input type='text' class='cuadroResultado bloqueado' name='msnBloqueados' readonly/>
+                        </span>
+                        <span class='' style="margin-bottom: 3px; display:block;">
+                            Mensajes a Telefonos Sin Whatsapp 
+                            <input type='text' class='cuadroResultado sinWhatsapp' name='msnSnWp' readonly/>
+                        </span>
+                        <span style="margin-bottom: 3px; display:block;">
+                            Mensajes a Telefonos Inexistentes
+                            <input type='text' class='cuadroResultado telefonoMal' name='msnInext' readonly/>
+                        </span>
+                        <span class=''>
+                            <input type='text' class='cuadroResultado' name='msnTotal' readonly/>
+                            <span class='negrilla separar alineacionDerecha ' style="margin-right: 9px; margin-top: 2px;">Total</span>
+                        </span>
+                    </div>
+                    <div class='contenedor60'>
+                        <div style="margin-top: -27px; width: 510px ; height: 300px;     margin-bottom: -173px;   margin-left: 23px;">
+                            <canvas id="grafMsn" width="200" height="100"  ></canvas>
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class='clear'></div>
+                <div class='negrilla'>CUENTAS</div>
+                <div class=''>
+                    <div class='contenedor40' id="contenedorCuenta">
+
+
+                    </div>
+                    <div class='contenedor60'></div>
+                </div>
+
             </div>
 
         </div>

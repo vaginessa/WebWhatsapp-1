@@ -9,10 +9,14 @@
         <script src="Script/Plugin/HERRAMIENTAS.js?1.0.2" type="text/javascript"></script>
         <script src="Script/Index.js" type="text/javascript"></script>
     </head>
-    <body>
+    <body style="background: linear-gradient(to bottom, #1ebea5 0%,#1ebea5 2%,#1ebea5 32%,white 32%,white 100%); overflow: hidden;">
 
         <div id="CuerpoLogin" class="centrar">
-            <div class='titulo'>ADMINISTRADOR</div>
+            <div class='titulo'>
+                <img src="img/conectado.png" alt="" style="width: 50px;"/>
+                <span style="    font-size: 23px; position: relative; top: -17px;">Massive Whatsapp</span>
+            </div>
+            
             <span class='negrillaenter'>CUENTA</span>
             <input type='text'  name='cuenta'/>
             <span class='negrillaenter'>CONTRASEÑA</span>

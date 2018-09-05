@@ -102,6 +102,7 @@ function generarReporte() {
             html += "<td><div class='normal'>" + totalNotiene + "</div></td>";
             html += "<td><div class='normal'>" + totalMal + "</div></td>";
             $("#tblResultado tfoot").html(html);
+            $("#tblResultado").igualartabla();
 
         }
     });
