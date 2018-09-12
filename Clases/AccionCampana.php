@@ -49,7 +49,7 @@ class AccionCampana {
     }
 
     function vencimientoQR() {
-        $consulta = "update whatsapp.accioncampana set estado='INACTIVO'  where (estado='QR GENERADO' || estado='OBTENER QR') and DATE_ADD(str_to_date(actualizado, '%d/%m/%Y %H:%i:%s'), INTERVAL 20 SECOND) < now()";
+        $consulta = "update whatsapp.accioncampana set estado='INACTIVO'  where (estado='QR GENERADO' || estado='OBTENER QR') and DATE_ADD(str_to_date(actualizado, '%d/%m/%Y %H:%i:%s'), INTERVAL 70 SECOND) < now()";
         return $this->CON->manipular($consulta);
     }
 

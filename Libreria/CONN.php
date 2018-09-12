@@ -36,7 +36,6 @@ class CONN {
     }
 
     function rellenar($resultado) {
-        //header("Content-Type: text/html;charset=utf-8");
         $lista = array();
         if ($resultado != null) {
             while ($row = $resultado->fetch_assoc()) {
