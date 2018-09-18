@@ -3,7 +3,6 @@ var jsonExcel = [];
 var idcampana = 0;
 var tengoQr = 0;
 var estadoQR = "INACTIVO";
-var wsUri = "ws://localhost:8888";
 var websocket;
 var env = 0;
 var blo = 0;
@@ -11,6 +10,7 @@ var sw = 0;
 var tm = 0;
 var ep = 0;
 $(document).ready(function () {
+    
     idcampana = localStorage.getItem("campana");
     if (idcampana === null || idcampana === "0") {
         window.location.href = "Campana.html";
@@ -109,6 +109,7 @@ $(document).ready(function () {
     });
 });
 function conectarSocket() {
+    wsUri = "ws://"+window.location.hostname+":8888";
     websocket = new WebSocket(wsUri);
     websocket.onmessage = function (ev) {
         var response = JSON.parse(ev.data);
@@ -137,9 +138,7 @@ function conectarSocket() {
                 case 'QR Generado':
                     var detalle = response.detalle;
                     var idcampana = response.idcampana;
-                    cargando(true);
                     $.get(url, {proceso: 'BuscarQR', idcampana: idcampana}, function (response) {
-                        cargando(false);
                         var json = $.parseJSON(response);
                         if (json.error.length > 0) {
                             if ("Error Session" === json.error) {
@@ -155,7 +154,6 @@ function conectarSocket() {
                             $("#estadoQR").addClass("verdeClarito");
                         }
                     });
-
                     break;
                 case 'Conectado':
                     $("#btnqr").text("Detener");
