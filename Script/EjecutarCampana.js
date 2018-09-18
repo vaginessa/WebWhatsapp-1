@@ -265,6 +265,7 @@ function actualizarCambios() {
             lista.push({id: id, mensaje: mensajeActual, telefono: vartelf});
         }
     }
+    ok();
     cargando(true);
     $.post(url, {proceso: 'actualizarCampana', listamensaje: lista, idcampana: idcampana, campana: campana,
         mensaje: mensaje, foto: foto, telefono: telefono}, function (response) {
@@ -277,7 +278,6 @@ function actualizarCambios() {
             $("body").msmOK(json.error);
         } else {
             $("body").msmOK("Los cambios se guardaron correctamente");
-            ok();
         }
     });
 }
