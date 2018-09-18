@@ -32,13 +32,8 @@ class AccionCampana {
         return $this->CON->manipular($consulta);
     }
 
-    function obtenerEstadoActual($idcampana, $tengoQR) {
-        $this->vencimientoQR(); // DESPUES QUITAR ESTO DE AQUI
-        $estado = "if(estado='QR GENERADO',codigoQR,'')";
-        if ($tengoQR === "1") {
-            $estado = "''";
-        }
-        $consulta = "select estado, $estado qr from  whatsapp.accioncampana where  campana_id=$idcampana";
+    function obtenerQR($idcampana) {
+        $consulta = "select codigoQR qr from  whatsapp.accioncampana where  campana_id=$idcampana";
         return $this->CON->consulta2($consulta)[0];
     }
     function pausarOtrasCampanas($idcampana) {

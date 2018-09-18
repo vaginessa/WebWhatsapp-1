@@ -3,11 +3,14 @@ var jsonExcel = [];
 var idcampana = 0;
 var tengoQr = 0;
 var estadoQR = "INACTIVO";
-var hilo = new Worker('../Script/Plugin/hilo.js');
+var wsUri = "ws://localhost:8888";
+var websocket;
+var env = 0;
+var blo = 0;
+var sw = 0;
+var tm = 0;
+var ep = 0;
 $(document).ready(function () {
-    hilo.addEventListener('message', function (e) {
-        cambioEstadoQR();
-    }, true);
     idcampana = localStorage.getItem("campana");
     if (idcampana === null || idcampana === "0") {
         window.location.href = "Campana.html";
@@ -67,11 +70,7 @@ $(document).ready(function () {
             $("#mensaje").val(campana.mensaje);
             $(".fotoCuadro img").attr("src", campana.arte);
             var htmlMensaje = "";
-            var env = 0;
-            var blo = 0;
-            var sw = 0;
-            var tm = 0;
-            var ep = 0;
+
             for (var i = 0; i < listamensaje.length; i++) {
                 var estado = listamensaje[i].respuesta;
                 var css = "";
@@ -105,174 +104,133 @@ $(document).ready(function () {
             $("#scTI").text(tm);
             $("#scEP").text(ep);
             $("#tblmensaje tbody").html(htmlMensaje);
-            setTimeout(function () {
-                actualizarResultadoMensaje();
-            }, 1000);
+            conectarSocket();
         }
     });
 });
-function detenerCampana() {
-    cargando(true);
-    $.post(url, {proceso: 'detenerCampana', idcampana: idcampana}, function (response) {
-        cargando(false);
-        var json = $.parseJSON(response);
-        if (json.error.length > 0) {
-            if ("Error Session" === json.error) {
-                window.parent.cerrarSession();
-            }
-            $("body").msmOK(json.error);
+function conectarSocket() {
+    websocket = new WebSocket(wsUri);
+    websocket.onmessage = function (ev) {
+        var response = JSON.parse(ev.data);
+        var tipo = response.tipo;
+        if (tipo === "system") {
+            send_message("iniciar", "Detener");
         } else {
-        }
-    });
-}
-function cambioEstadoQR() {
-    $.get(url, {proceso: 'estadoActual', idcampana: idcampana, tengoQR: tengoQr}, function (response) {
-        var json = $.parseJSON(response);
-        if (json.error.length > 0) {
-            if ("Error Session" === json.error) {
-                window.parent.cerrarSession();
-            }
-            $("body").msmOK(json.error);
-        } else {
-            var item = json.result;
-            if (item.estado === "QR GENERADO" && tengoQr === 1) {
-                setTimeout(function () {
-                    cambioEstadoQR();
-                }, 500);
-            }
-            if (item.estado === "QR GENERADO" && tengoQr === 0) {
-                $("#imgQR").attr("src", item.qr);
-                $("#estadoQR").html("Esperando");
-                tengoQr = 1;
-                setTimeout(function () {
-                    cambioEstadoQR();
-                }, 500);
-            }
-            if (item.estado === "INACTIVO") {
-                $("#btnqr").text("Obtener QR");
-                $("#estadoQR").html("Desconectado");
-                $("#estadoQR").removeClass("verdeClarito");
-                $("#estadoQR").removeClass("AmarilloClarito");
-                $("#estadoQR").addClass("rojoClarito");
-                $("#imgQR").attr("src", "../img/desconectado.png");
-                tengoQr = 0;
-            }
-            if (item.estado === "ACTIVO") {
-                /*if ($("#estadoQR").html() !== "Conectado") {
+            var accion = response.accion;
+            switch (accion) {
+                case 'Detener':
                     $("#btnqr").text("Obtener QR");
-                    GenerarQR();
-                }*/
-                $("#btnqr").text("Detener");
-                $("#estadoQR").html("Conectado");
-                $("#estadoQR").removeClass("rojoClarito");
-                $("#estadoQR").removeClass("AmarilloClarito");
-                $("#estadoQR").addClass("verdeClarito");
-                $("#imgQR").attr("src", "../img/conectado.png");
-                tengoQr = 0;
-                setTimeout(function () {
-                    cambioEstadoQR();
-                }, 500);
+                    $("#estadoQR").html("Desconectado");
+                    $("#estadoQR").removeClass("verdeClarito");
+                    $("#estadoQR").removeClass("AmarilloClarito");
+                    $("#estadoQR").addClass("rojoClarito");
+                    $("#imgQR").attr("src", "../img/desconectado.png");
+                    break;
+                case 'Obtener QR':
+                    $("#estadoQR").html("Esperando QR");
+                    $("#btnqr").text("Detener");
+                    $("#estadoQR").removeClass("verdeClarito");
+                    $("#estadoQR").removeClass("rojoClarito");
+                    $("#estadoQR").addClass("AmarilloClarito");
+                    $("#imgQR").attr("src", "../img/desconectado.png");
+                    break;
+                case 'QR Generado':
+                    var detalle = response.detalle;
+                    var idcampana = response.idcampana;
+                    cargando(true);
+                    $.get(url, {proceso: 'BuscarQR', idcampana: idcampana}, function (response) {
+                        cargando(false);
+                        var json = $.parseJSON(response);
+                        if (json.error.length > 0) {
+                            if ("Error Session" === json.error) {
+                                window.parent.cerrarSession();
+                            }
+                            $("body").msmOK(json.error);
+                        } else {
+                            $("#imgQR").attr("src", json.result.qr);
+                            $("#estadoQR").html("Inicialice..");
+                            $("#btnqr").text("Detener");
+                            $("#estadoQR").removeClass("rojoClarito");
+                            $("#estadoQR").removeClass("AmarilloClarito");
+                            $("#estadoQR").addClass("verdeClarito");
+                        }
+                    });
 
-            }
-            if (item.estado === "OBTENER QR") {
-                setTimeout(function () {
-                    tengoQr = 0;
-                    cambioEstadoQR();
-                }, 500);
+                    break;
+                case 'Conectado':
+                    $("#btnqr").text("Detener");
+                    $("#estadoQR").html("Conectado");
+                    $("#estadoQR").removeClass("rojoClarito");
+                    $("#estadoQR").removeClass("AmarilloClarito");
+                    $("#estadoQR").addClass("verdeClarito");
+                    $("#imgQR").attr("src", "../img/conectado.png");
+                    break;
+                case 'EnvioMsn':
+                    var detalle = response.detalle;
+                    var idmensaje = response.id;
+                    var fecha = response.fecha;
+                    
+                    var css = "";
+                    if (detalle === "ENVIADO") {
+                        css = "enviado";
+                        env++;
+                    }
+                    if (detalle === "BLOQUEADO") {
+                        css = "bloqueado";
+                        blo++;
+                    }
+                    if (detalle === "NOTIENE") {
+                        css = "sinWhatsapp";
+                        sw++;
+                    }
+                    if (detalle === "TELEFONO MAL") {
+                        css = "telefonoMal";
+                        tm++;
+                    }
+                    if (detalle === "ESPERA") {
+                        css = "espera";
+                        ep++;
+                    }
+                    $("#scE").text(env);
+                    $("#scB").text(blo);
+                    $("#scSW").text(sw);
+                    $("#scTI").text(tm);
+                    $("#scEP").text(ep);
+                    $("#m" + idmensaje).find("div:eq(1)").html(detalle);
+                    $("#m" + idmensaje).find("td:eq(1)").removeClass("espera").addClass(css);
+                    $("#m" + idmensaje).find("div:eq(2)").html(fecha);
+                    break;
             }
         }
-    });
+    };
+    websocket.onerror = function (ev) {
+        window.location.href = "Campana.html";
+    };
+    websocket.onclose = function (ev) {
+        window.location.href = "Campana.html";
+    };
+}
+function send_message(tipo, accion) {
+    var msg = {
+        tipo: tipo,
+        detalle: '',
+        accion: accion,
+        id: '',
+        fecha: '',
+        idcampana: idcampana
+    };
+    websocket.send(JSON.stringify(msg));
 }
 function GenerarQR() {
-    var estado = $("#btnqr").text().toUpperCase();
-    cargando(true);
-    $.post(url, {proceso: 'qr', estado: estado, idcampana: idcampana, estado: estado}, function (response) {
-        cargando(false);
-        var json = $.parseJSON(response);
-        if (json.error.length > 0) {
-            if ("Error Session" === json.error) {
-                window.parent.cerrarSession();
-            }
-            $("body").msmOK(json.error);
-        } else {
-            tengoQr = 0;
-            $("#estadoQR").html("Esperando QR");
-            $("#estadoQR").removeClass("verdeClarito");
-            $("#estadoQR").removeClass("rojoClarito");
-            $("#estadoQR").addClass("AmarilloClarito");
-            if (estado === "DETENER") {
-                $("#btnqr").text("Obtener QR");
-                $("#estadoQR").html("Desconectado");
-                $("#estadoQR").removeClass("verdeClarito");
-                $("#estadoQR").removeClass("AmarilloClarito");
-                $("#estadoQR").addClass("rojoClarito");
-                $("#imgQR").attr("src", "../img/desconectado.png");
-                tengoQr = 0;
-            } else {
-                hilo.postMessage({});
-            }
-
-        }
-    });
-}
-function actualizarResultadoMensaje() {
-    $.get(url, {proceso: 'resultadoMensaje', idcampana: idcampana}, function (response) {
-        var json = $.parseJSON(response);
-        if (json.error.length > 0) {
-            if ("Error Session" === json.error) {
-                window.parent.cerrarSession();
-            }
-            $("body").msmOK(json.error);
-        } else {
-            var listamensaje = json.result;
-            var env = 0;
-            var blo = 0;
-            var sw = 0;
-            var tm = 0;
-            var ep = 0;
-            for (var i = 0; i < listamensaje.length; i++) {
-                var estado = listamensaje[i].respuesta;
-                var css = "";
-                if (estado === "ENVIADO") {
-                    css = "enviado";
-                    env++;
-                }
-                if (estado === "BLOQUEADO") {
-                    css = "bloqueado";
-                    blo++;
-                }
-                if (estado === "NOTIENE") {
-                    css = "sinWhatsapp";
-                    sw++;
-                }
-                if (estado === "TELEFONO MAL") {
-                    css = "telefonoMal";
-                    tm++;
-                }
-                if (estado === "ESPERA") {
-                    css = "espera";
-                    ep++;
-                }
-                $("#m" + listamensaje[i].idmensaje).find("td:eq(1)").removeClass("enviado")
-                        .removeClass("bloqueado").removeClass("sinWhatsapp")
-                        .removeClass("telefonoMal").removeClass("espera").addClass(css);
-
-                $("#m" + listamensaje[i].idmensaje).find("div:eq(1)").html(estado);
-                $("#m" + listamensaje[i].idmensaje).find("div:eq(2)").html(listamensaje[i].hora);
-            }
-            $("#scE").text(env);
-            $("#scB").text(blo);
-            $("#scSW").text(sw);
-            $("#scTI").text(tm);
-            $("#scEP").text(ep);
-            if (ep > 0) {
-                setTimeout(function () {
-                    actualizarResultadoMensaje();
-                }, 1000);
-            }
-
-        }
-    });
+    var btn = $("#btnqr").text();
+    switch (btn) {
+        case 'Obtener QR':
+            send_message("mensaje", btn);
+            break;
+        case 'Detener':
+            send_message("mensaje", btn);
+            break;
+    }
 }
 function msnActualizarCampana() {
     var estado = $("#rojoClarito").html();
