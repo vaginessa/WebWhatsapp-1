@@ -12,7 +12,7 @@ socket_listen($socket);
 //php -q F:\xampp\htdocs\tiotito\socket\server.php
 $clients = array($socket);
 $listaclients = array();
-$AppServer;
+$AppServer = null;
 
 while (true) {
     $changed = $clients;
@@ -77,7 +77,11 @@ while (true) {
             $item = $listaclients[$idcampana];
             if ($item) {
                 foreach ($item as $changed_so) {
-                    $response_text = mask(json_encode(array('tipo' => tipo, 'idcampana' => $idcampana, 'detalle' => $detalle, 'accion' => $accion, 'id' => $idmsn, 'fecha' => $fecha)));
+                    if ($AppServer == null) {/////
+                        $response_text = mask(json_encode(array('tipo' => $tipo, 'idcampana' => $idcampana, 'detalle' => $detalle, 'accion' => "Server Off", 'id' => $idmsn, 'fecha' => $fecha)));
+                    } else {
+                        $response_text = mask(json_encode(array('tipo' => $tipo, 'idcampana' => $idcampana, 'detalle' => $detalle, 'accion' => $accion, 'id' => $idmsn, 'fecha' => $fecha)));
+                    }
                     socket_write($changed_so["id"], $response_text, strlen($response_text));
                 }
             }

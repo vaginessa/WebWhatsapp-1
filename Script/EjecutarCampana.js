@@ -119,6 +119,15 @@ function conectarSocket() {
         } else {
             var accion = response.accion;
             switch (accion) {
+                case 'Server Off':
+                    $("#btnqr").text("Obtener QR");
+                    $("#estadoQR").html("Desconectado");
+                    $("#estadoQR").removeClass("verdeClarito");
+                    $("#estadoQR").removeClass("AmarilloClarito");
+                    $("#estadoQR").addClass("rojoClarito");
+                    $("#imgQR").attr("src", "../img/desconectado.png");
+                    $("body").msmOK("El servidor se encuentra desconectado. Intente nuevamente o contactese con el administrador del portal.");
+                    break;
                 case 'Detener':
                     $("#btnqr").text("Obtener QR");
                     $("#estadoQR").html("Desconectado");
